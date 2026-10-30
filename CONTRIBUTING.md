@@ -81,8 +81,16 @@ CI runs `scripts/format.sh --check` and fails on any difference.
 
 ## Making a change
 
+Every change, including the maintainer's, reaches `main` through a pull request. `main` is protected:
+
+- Nobody can push to it directly or force-push it.
+- A pull request can only merge once the **Lint, test and build** CI check passes on a branch that's up to date with `main`, and all review conversations are resolved.
+- Pull requests are squash-merged, so each one lands on `main` as one commit, and the branch is deleted afterwards.
+
+The steps:
+
 1. **Open an issue first** for anything bigger than a small fix, so we can agree on the approach before you spend time on it. Matching changes especially, since a tweak that fixes one title can break another.
-2. **Branch from `main`.**
+2. **Branch from an up-to-date `main`.** Name the branch for what it does: `fix/feat-in-artist`, `feature/search-by-album`, `docs/…`, `ci/…`.
 3. **Add or update tests.** Every matching change needs a test with the real-world title that prompted it. If it's an end-to-end case, add it to `scripts/make-test-library.sh` and update the expected counts.
 4. **Run `scripts/format.sh` and `scripts/test.sh`.**
 5. **Update the docs** if behaviour changed: README for anything user-visible, `docs/ARCHITECTURE.md` for the design, `CHANGELOG.md` under **Unreleased**.
@@ -109,7 +117,8 @@ Maintainers only:
 
 1. Update `CFBundleShortVersionString` (and bump `CFBundleVersion`) in `Resources/Info.plist`.
 2. In `CHANGELOG.md`, move the **Unreleased** entries under the new version with today's date.
-3. Commit with the message "Release vX.Y.Z", tag it `vX.Y.Z` and push the tag.
+3. Make these changes on a `release/vX.Y.Z` branch and open a pull request titled "Release vX.Y.Z".
+4. Once it's merged, tag the merge commit on `main` as `vX.Y.Z` and push the tag.
 
 ## License
 
