@@ -177,7 +177,11 @@ struct Detail: View {
     var body: some View {
         if model.libraryPath == nil {
             ContentUnavailableView {
-                Label("Choose your DJ folder", systemImage: "folder")
+                Label {
+                    Text("Choose your DJ folder")
+                } icon: {
+                    Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 96, height: 96)
+                }
             } description: {
                 Text(
                     "am2rb matches your Apple Music playlists against the files Rekordbox already uses. It only reads them; nothing is moved or retagged."

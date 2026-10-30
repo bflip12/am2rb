@@ -15,5 +15,6 @@ The first public release will be 0.1.0.
 - `.m3u8` export with absolute paths, ready for Rekordbox's Import Playlist.
 - A fallback for Apple Music's Unicode Text playlist export (⌘O).
 - A tag cache, so only new or changed files are read after the first scan.
+- An app icon and logo mark, drawn by `scripts/make-icon.sh`.
 
 [Unreleased]: https://github.com/bflip12/am2rb/commits/main

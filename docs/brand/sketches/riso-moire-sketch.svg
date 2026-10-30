@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" width="720" height="420">
+  <title>Sketch: Riso moiré icon in forest and yellow, with the Geist wordmark</title>
+  <!-- A direction sketch, not final artwork. The wordmark is live text in Geist, not outlines. -->
+  <defs>
+    <clipPath id="sq"><rect width="100" height="100" rx="22.5"/></clipPath>
+    <clipPath id="ml"><circle cx="42" cy="50" r="31"/></clipPath>
+    <clipPath id="mr"><circle cx="58" cy="50" r="31"/></clipPath>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="7" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.18"/></feComponentTransfer>
+    </filter>
+    <symbol id="moire" viewBox="0 0 100 100"><g clip-path="url(#sq)">
+      <rect width="100" height="100" fill="#F2ECDC"/>
+      <g clip-path="url(#ml)" fill="none" stroke-width="2.4" stroke="#2F5A49">
+        <circle cx="42" cy="50" r="5"/><circle cx="42" cy="50" r="10.5"/><circle cx="42" cy="50" r="16"/><circle cx="42" cy="50" r="21.5"/><circle cx="42" cy="50" r="27"/>
+      </g>
+      <g clip-path="url(#mr)" fill="none" stroke-width="2.4" stroke="#F5D000" style="mix-blend-mode:multiply" transform="translate(.5 -.4)">
+        <circle cx="58" cy="50" r="5"/><circle cx="58" cy="50" r="10.5"/><circle cx="58" cy="50" r="16"/><circle cx="58" cy="50" r="21.5"/><circle cx="58" cy="50" r="27"/>
+      </g>
+      <rect width="100" height="100" filter="url(#grain)" style="mix-blend-mode:multiply"/>
+    </g></symbol>
+  </defs>
+
+  <!-- Light: paper ground -->
+  <rect width="720" height="210" fill="#F2ECDC"/>
+  <use href="#moire" x="40" y="45" width="120" height="120"/>
+  <text x="184" y="128" font-family="Geist, -apple-system, sans-serif" font-weight="600" font-size="64" letter-spacing="-3.2" fill="#1E3A2F">crate<tspan fill="#2F5A49">mate</tspan></text>
+  <use href="#moire" x="560" y="89" width="32" height="32"/>
+  <use href="#moire" x="604" y="105" width="16" height="16"/>
+
+  <!-- Dark: deep forest ground -->
+  <rect y="210" width="720" height="210" fill="#1E3A2F"/>
+  <use href="#moire" x="40" y="255" width="120" height="120"/>
+  <text x="184" y="338" font-family="Geist, -apple-system, sans-serif" font-weight="600" font-size="64" letter-spacing="-3.2" fill="#F2ECDC">crate<tspan fill="#F5D000">mate</tspan></text>
+  <use href="#moire" x="560" y="299" width="32" height="32"/>
+  <use href="#moire" x="604" y="315" width="16" height="16"/>
+</svg>
