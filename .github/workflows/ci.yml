@@ -17,7 +17,7 @@ jobs:
     name: Lint, test and build
     runs-on: macos-26
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Show toolchain
         run: swift --version
@@ -40,7 +40,7 @@ jobs:
           ditto -c -k --keepParent build/am2rb.app build/am2rb.zip
 
       - name: Upload the app bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: am2rb-${{ github.sha }}
           path: build/am2rb.zip
