@@ -4,7 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-PATHS=(Package.swift Sources Tests)
+PATHS=(Package.swift Sources Tests scripts/make-icon.swift)
 if [ "${1:-}" = "--check" ]; then
   swift format lint --strict --recursive --parallel "${PATHS[@]}"
 else

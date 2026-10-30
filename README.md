@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/assets/icon.png" width="128" height="128" alt="">
+
 # am2rb
 
 **Apple Music playlists → Rekordbox, using the DJ files you already have.**
