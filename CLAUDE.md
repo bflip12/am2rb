@@ -15,6 +15,12 @@ Read these before changing anything:
 - **No network access and no third-party dependencies.**
 - **Don't use SwiftUI `@State`.** In the macOS 27 SDK it's a macro whose plugin ships only with Xcode, so a build with only the Command Line Tools fails. Keep UI state on the `@Observable` models (e.g. `RowReview.searching`, `AppModel.playlistFilter`). `@Observable`, `@Bindable` and `@Environment` are fine.
 
+## Git workflow
+
+- **Never commit to `main`.** It's protected on GitHub: no direct pushes or force-pushes, and merging needs a pull request with the "Lint, test and build" check passing.
+- Start every change on a new branch from an up-to-date `main` (`fix/…`, `feature/…`, `docs/…`, `ci/…`), push it, and open a pull request with the template filled in.
+- Pull requests are squash-merged and the branch is deleted automatically. After a merge, run `git switch main && git pull` before starting the next branch.
+
 ## Build and test gotchas
 
 - The project builds with the Command Line Tools alone; there's no Xcode project. `scripts/build-app.sh` assembles and ad-hoc signs `build/am2rb.app` (`--install` copies it to /Applications). The signature lets macOS remember the Media & Apple Music permission.
