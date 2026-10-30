@@ -1,0 +1,116 @@
+# Contributing to am2rb
+
+Thanks for helping out! This guide covers setting up, making a change and getting it merged. For coding conventions, see [docs/CODE_STYLE.md](docs/CODE_STYLE.md). For how the app fits together, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+## Ground rules
+
+Every change has to keep these three rules:
+
+1. **Never write to the DJ folder.** Rekordbox tracks files by path. Moving, renaming or retagging a file breaks the user's collection, along with their cues and grids. am2rb only reads from that folder.
+2. **No network access.** am2rb works entirely offline, and the README's privacy section promises that.
+3. **No third-party dependencies** without discussing them in an issue first. The app uses only Apple's frameworks.
+
+## Setting up
+
+You need macOS 14 or later and Swift 6 or later. The Xcode Command Line Tools are enough, and full Xcode works too. For the end-to-end test, you also need `ffmpeg` (`brew install ffmpeg`).
+
+```bash
+git clone https://github.com/bflip12/am2rb.git
+cd am2rb
+swift build
+```
+
+### Running the app
+
+`iTunesLibrary` only works when the app is launched as a bundle through LaunchServices. Running `.build/debug/am2rb` from a terminal fails with an XPC or permission error, so build the bundle and open it:
+
+```bash
+scripts/build-app.sh
+```
+
+```bash
+open build/am2rb.app
+```
+
+`build-app.sh` builds a release binary, wraps it in `build/am2rb.app` and ad-hoc signs it. The signature lets macOS remember the Apple Music permission between builds. `--install` also copies the bundle to `/Applications`.
+
+### Running the tests
+
+Unit tests:
+
+```bash
+scripts/test.sh
+```
+
+To add the end-to-end test, first generate a fake tagged library and a sample Apple Music export:
+
+```bash
+scripts/make-test-library.sh /tmp/am2rb-test
+```
+
+Then run the tests against it:
+
+```bash
+scripts/test.sh /tmp/am2rb-test
+```
+
+The expected end-to-end result is 9 matched and 1 not found ("Nobody - Not In Library").
+
+Use `scripts/test.sh` rather than plain `swift test`. With only the Command Line Tools installed, incremental builds can lose the Swift Testing macro plugin, and the script passes its path explicitly.
+
+### Formatting
+
+The code is formatted with [swift-format](https://github.com/swiftlang/swift-format), which comes with the Swift toolchain, using the settings in [`.swift-format`](.swift-format). Format your changes before committing:
+
+```bash
+scripts/format.sh
+```
+
+CI runs `scripts/format.sh --check` and fails on any difference.
+
+## Project layout
+
+| Path | What's there |
+|---|---|
+| `Sources/Am2rbCore/` | All the logic, with no UI: Apple Music reading, library scanning, matching, M3U writing. Covered by the tests. |
+| `Sources/am2rb/` | The SwiftUI app: the `AppModel` state object and the views. |
+| `Tests/Am2rbCoreTests/` | Swift Testing tests for `Am2rbCore`. |
+| `Resources/Info.plist` | The app bundle's Info.plist, including version numbers and the Apple Music usage string. |
+| `scripts/` | Build, test, format and test-library scripts. |
+| `docs/` | Architecture and code style. |
+
+## Making a change
+
+1. **Open an issue first** for anything bigger than a small fix, so we can agree on the approach before you spend time on it. Matching changes especially, since a tweak that fixes one title can break another.
+2. **Branch from `main`.**
+3. **Add or update tests.** Every matching change needs a test with the real-world title that prompted it. If it's an end-to-end case, add it to `scripts/make-test-library.sh` and update the expected counts.
+4. **Run `scripts/format.sh` and `scripts/test.sh`.**
+5. **Update the docs** if behaviour changed: README for anything user-visible, `docs/ARCHITECTURE.md` for the design, `CHANGELOG.md` under **Unreleased**.
+6. **Open a pull request** and fill in the template.
+
+### Commit messages
+
+- Write the subject in the imperative and keep it to about 72 characters, e.g. "Prefer the extended mix when lengths tie".
+- In the body, explain *why* the change is needed, not just what it does. A reviewer should be able to understand the problem from the message alone.
+- Make one logical change per commit. A formatting-only change goes in its own commit.
+
+### Reporting a matching problem
+
+The most useful bug reports for the matcher are concrete pairs. For each one, include:
+
+- the song as Apple Music shows it: title, artist and length;
+- the file am2rb picked, and the file it should have picked: filename, title and artist tags, and length.
+
+Please don't attach audio files. The metadata is all that's needed.
+
+## Releasing
+
+Maintainers only:
+
+1. Update `CFBundleShortVersionString` (and bump `CFBundleVersion`) in `Resources/Info.plist`.
+2. In `CHANGELOG.md`, move the **Unreleased** entries under the new version with today's date.
+3. Commit with the message "Release vX.Y.Z", tag it `vX.Y.Z` and push the tag.
+
+## License
+
+By contributing, you agree that your contributions are licensed under the [MIT License](LICENSE).
