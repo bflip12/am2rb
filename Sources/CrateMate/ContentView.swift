@@ -1,6 +1,6 @@
 // The window: playlists in the sidebar, the match review in the detail, and export.
 
-import Am2rbCore
+import CrateMateCore
 import SwiftUI
 
 struct ContentView: View {
@@ -184,7 +184,7 @@ struct Detail: View {
                 }
             } description: {
                 Text(
-                    "am2rb matches your Apple Music playlists against the files Rekordbox already uses. It only reads them; nothing is moved or retagged."
+                    "CrateMate matches your Apple Music playlists against the files Rekordbox already uses. It only reads them; nothing is moved or retagged."
                 )
             } actions: {
                 Button("Choose Folder…") { model.chooseLibrary() }.buttonStyle(.borderedProminent)

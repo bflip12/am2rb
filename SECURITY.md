@@ -12,7 +12,7 @@ Include what you found, how to reproduce it, and what an attacker could do with 
 
 ## Scope
 
-am2rb runs locally and makes no network requests. The areas most worth a look are:
+CrateMate runs locally and makes no network requests. The areas most worth a look are:
 
 - Parsing untrusted input: Apple Music text exports, and tags in audio files.
-- Anything that could make am2rb write outside the export folder or its own cache, or modify files in the DJ folder. The app must never do either.
+- Anything that could make CrateMate write outside the export folder or its own cache, or modify files in the DJ folder. The app must never do either.

@@ -1,6 +1,6 @@
 # Code style
 
-These are the conventions for am2rb's Swift code. Most of the formatting is automatic. The rest is about keeping the code small, readable and safe for the user's files.
+These are the conventions for CrateMate's Swift code. Most of the formatting is automatic. The rest is about keeping the code small, readable and safe for the user's files.
 
 ## Formatting
 
@@ -11,7 +11,7 @@ These are the conventions for am2rb's Swift code. Most of the formatting is auto
 
 ## Structure
 
-- **Logic goes in `Am2rbCore`.** It must not import SwiftUI or AppKit. If something can be unit tested, it belongs here.
+- **Logic goes in `CrateMateCore`.** It must not import SwiftUI or AppKit. If something can be unit tested, it belongs here.
 - **The app target stays thin.** `AppModel` coordinates, and views display. A view shouldn't make a decision that a test would want to cover.
 - **Each file starts with a `//` comment** of one or two lines saying what the file is for and anything non-obvious about it, e.g. "Read-only: files are never moved, renamed or retagged".
 - Use `// MARK: - Section` to divide longer files.
@@ -20,7 +20,7 @@ These are the conventions for am2rb's Swift code. Most of the formatting is auto
 ## Naming
 
 - Follow the [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/).
-- Public API in `Am2rbCore` uses full, descriptive names: `matchThreshold`, `scanLibrary(_:rescan:progress:)`.
+- Public API in `CrateMateCore` uses full, descriptive names: `matchThreshold`, `scanLibrary(_:rescan:progress:)`.
 - Short names are fine for locals in a tight scope (`p` for a playlist in a closure, `t` for a track, `s` for a score). If the reader would have to scroll to find what a short name means, spell it out.
 - Domain terms are used consistently:
 
@@ -34,7 +34,7 @@ These are the conventions for am2rb's Swift code. Most of the formatting is auto
 
 ## Documentation
 
-- **Every `public` declaration in `Am2rbCore` has a `///` doc comment.** swift-format enforces this (`AllPublicDeclarationsHaveDocumentation`).
+- **Every `public` declaration in `CrateMateCore` has a `///` doc comment.** swift-format enforces this (`AllPublicDeclarationsHaveDocumentation`).
 - Start with a one-line summary. Add a blank `///` line and more detail only when there's something a caller needs to know: units (seconds, 0–1 scores), what `nil` or an empty string means, and side effects.
 - Use DocC symbol links in double backticks, e.g. ``` ``LibraryIndex`` ```.
 - Plain comments explain *why*, not what. For example: `// Duration is what tells an Extended Mix from an Original Mix`. If a comment just restates the code, delete it.
@@ -47,7 +47,7 @@ These protect the user's DJ library and are checked in review:
 - **Never write to the DJ folder.** Open audio files read-only (`.readPermission`, `AVURLAsset`). Don't move, rename or retag anything, and don't put temporary files there.
 - **Never make network requests.**
 - **Don't add dependencies.** Use Apple frameworks only. If you think a dependency is needed, open an issue first.
-- Writes go to only two places: the export folder the user chose, and `~/Library/Application Support/am2rb/`.
+- Writes go to only two places: the export folder the user chose, and `~/Library/Application Support/CrateMate/`.
 
 ## Swift
 
@@ -70,7 +70,7 @@ These protect the user's DJ library and are checked in review:
 - Write in plain, friendly sentences.
 - Buttons and menu items use title case, as the macOS Human Interface Guidelines do: "Show in Finder", "Choose Folder…". Headings, labels and messages use sentence case: "Needs attention", "Choose your DJ folder".
 - Use an ellipsis (…) on a command that opens a dialog. Write menu paths with `›`, e.g. "File › Import › Import Playlist".
-- Error messages say what happened, then what to do. For example: "Couldn't read your Apple Music library. Allow am2rb in System Settings › Privacy & Security › Media & Apple Music, or open a playlist exported as Unicode Text."
+- Error messages say what happened, then what to do. For example: "Couldn't read your Apple Music library. Allow CrateMate in System Settings › Privacy & Security › Media & Apple Music, or open a playlist exported as Unicode Text."
 - Say "DJ folder", not "library", when talking to the user.
 
 ## Tests

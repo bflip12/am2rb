@@ -1,6 +1,6 @@
-# am2rb: notes for AI coding agents
+# CrateMate: notes for AI coding agents
 
-am2rb is a native SwiftUI Mac app. It reads Apple Music playlists through `iTunesLibrary.framework`, matches each song by metadata against the user's local DJ folder, and writes an `.m3u8` with absolute paths that Rekordbox imports, linking each entry to tracks already in its collection.
+CrateMate is a native SwiftUI Mac app. It reads Apple Music playlists through `iTunesLibrary.framework`, matches each song by metadata against the user's local DJ folder, and writes an `.m3u8` with absolute paths that Rekordbox imports, linking each entry to tracks already in its collection.
 
 Read these before changing anything:
 
@@ -23,12 +23,13 @@ Read these before changing anything:
 
 ## Build and test gotchas
 
-- The project builds with the Command Line Tools alone; there's no Xcode project. `scripts/build-app.sh` assembles and ad-hoc signs `build/am2rb.app` (`--install` copies it to /Applications). The signature lets macOS remember the Media & Apple Music permission.
+- The project builds with the Command Line Tools alone; there's no Xcode project. `scripts/build-app.sh` assembles and ad-hoc signs `build/CrateMate.app` (`--install` copies it to /Applications). The signature lets macOS remember the Media & Apple Music permission.
 - The build script restamps the binary's SDK version with `vtool`. SwiftPM records the deployment target (14.0) as the SDK version, which makes macOS run the app in compatibility mode with the old window chrome. Don't remove that step.
-- `iTunesLibrary` only works when the .app is launched through LaunchServices (`open build/am2rb.app`). Running the binary from a shell fails with an XPC or permission error.
+- `iTunesLibrary` only works when the .app is launched through LaunchServices (`open build/CrateMate.app`). Running the binary from a shell fails with an XPC or permission error.
 - Use `scripts/test.sh`, not `swift test`. With the Command Line Tools, incremental builds can lose the Swift Testing macro plugin, and the script passes `-plugin-path`.
 - For the end to end test, run `scripts/make-test-library.sh <dir>` (needs ffmpeg), then `scripts/test.sh <dir>`. The expected result is 9 matched and 1 not found ("Nobody - Not In Library").
-- Run `scripts/format.sh` before committing. CI runs `scripts/format.sh --check`, and swift-format requires doc comments on every `public` declaration in `Am2rbCore`.
+- Run `scripts/format.sh` before committing. CI runs `scripts/format.sh --check`, and swift-format requires doc comments on every `public` declaration in `CrateMateCore`.
+- The app icon is drawn in code by `scripts/make-icon.swift`. Run `scripts/make-icon.sh` after changing it and commit the outputs. Brand guidelines and logo files are in [docs/brand](docs/brand/README.md).
 
 ## Status
 

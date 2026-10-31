@@ -3,13 +3,13 @@
 import SwiftUI
 
 @main
-struct Am2rbApp: App {
+struct CrateMateApp: App {
     // One model for the app's single window. (No @State: in the macOS 27 SDK it's a macro
     // whose plugin only ships with full Xcode, and this builds with the Command Line Tools.)
     private let model = AppModel.shared
 
     var body: some Scene {
-        Window("am2rb", id: "main") {
+        Window("CrateMate", id: "main") {
             ContentView()
                 .environment(model)
                 .frame(minWidth: 820, minHeight: 480)

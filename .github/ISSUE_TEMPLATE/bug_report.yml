@@ -27,8 +27,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: am2rb version or commit
-      description: The version in am2rb › About am2rb, or the output of `git rev-parse --short HEAD`.
+      label: CrateMate version or commit
+      description: The version in CrateMate › About CrateMate, or the output of `git rev-parse --short HEAD`.
     validations:
       required: true
   - type: input

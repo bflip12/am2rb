@@ -1,7 +1,7 @@
 // App state: playlists, the scanned library, per-row picks and export.
 
-import Am2rbCore
 import AppKit
+import CrateMateCore
 import Observation
 
 @Observable final class RowReview: Identifiable {
@@ -60,12 +60,18 @@ enum ScanState: Equatable {
 @Observable @MainActor final class AppModel {
     static let shared = AppModel()
 
-    var libraryPath: String? = UserDefaults.standard.string(forKey: "library") {
+    /// Settings saved before the app was renamed from am2rb, under its old bundle identifier.
+    private static let legacyDefaults = UserDefaults(suiteName: "com.bobbyf.am2rb")
+
+    var libraryPath: String? =
+        UserDefaults.standard.string(forKey: "library") ?? legacyDefaults?.string(forKey: "library")
+    {
         didSet { UserDefaults.standard.set(libraryPath, forKey: "library") }
     }
     var outputPath: String =
         UserDefaults.standard.string(forKey: "output")
-        ?? FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Music/am2rb").path
+        ?? legacyDefaults?.string(forKey: "output")
+        ?? FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Music/CrateMate").path
     {
         didSet { UserDefaults.standard.set(outputPath, forKey: "output") }
     }
@@ -104,7 +110,7 @@ enum ScanState: Equatable {
                 playlistsError = nil
             } catch {
                 playlistsError =
-                    "Couldn't read your Apple Music library. Allow am2rb in System Settings › Privacy & Security › Media & Apple Music, or open a playlist exported as Unicode Text."
+                    "Couldn't read your Apple Music library. Allow CrateMate in System Settings › Privacy & Security › Media & Apple Music, or open a playlist exported as Unicode Text."
             }
         }
     }
@@ -132,7 +138,7 @@ enum ScanState: Equatable {
         }
         scan = .scanning(done: 0, total: 0)
         Task {
-            let result = await Am2rbCore.scanLibrary(URL(fileURLWithPath: path), rescan: rescan) { done, total in
+            let result = await CrateMateCore.scanLibrary(URL(fileURLWithPath: path), rescan: rescan) { done, total in
                 Task { @MainActor in
                     if case .scanning = self.scan { self.scan = .scanning(done: done, total: total) }
                 }

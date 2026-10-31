@@ -7,9 +7,9 @@ import Foundation
 
 let audioExtensions: Set<String> = ["mp3", "wav", "aif", "aiff", "flac", "m4a", "aac", "alac", "ogg", "opus", "wma"]
 
-/// `~/Library/Application Support/am2rb`, where the tag cache lives.
+/// `~/Library/Application Support/CrateMate`, where the tag cache lives.
 public let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-    .appendingPathComponent("am2rb", isDirectory: true)
+    .appendingPathComponent("CrateMate", isDirectory: true)
 let cacheFile = appSupportDir.appendingPathComponent("library-cache.json")
 
 struct CachedTags: Codable {

@@ -5,7 +5,7 @@
 # With full Xcode selected (as on CI) that folder doesn't exist and isn't needed.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-[ -n "${1:-}" ] && export AM2RB_TEST_LIBRARY="$1"
+[ -n "${1:-}" ] && export CRATEMATE_TEST_LIBRARY="$1"
 PLUGINS=/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing
 if [ -d "$PLUGINS" ]; then
   swift test -Xswiftc -plugin-path -Xswiftc "$PLUGINS"
