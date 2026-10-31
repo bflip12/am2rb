@@ -15,8 +15,8 @@ Every change has to keep these three rules:
 You need macOS 14 or later and Swift 6 or later. The Xcode Command Line Tools are enough, and full Xcode works too. For the end-to-end test, you also need `ffmpeg` (`brew install ffmpeg`).
 
 ```bash
-git clone https://github.com/bflip12/am2rb.git
-cd am2rb
+git clone https://github.com/bflip12/cratemate.git
+cd cratemate
 swift build
 ```
 

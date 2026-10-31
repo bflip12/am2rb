@@ -17,7 +17,7 @@ The audience is working and bedroom DJs: people who care about records and their
 
 **How it should feel: an organisation tool for a record collection.** It sorts and files; it doesn't make music. Avoid anything that reads as a music-making or music-streaming app (waveforms, knobs, faders, equaliser bars, play buttons).
 
-The app was called am2rb (Apple Music to Rekordbox) until the brand was settled. The app, bundle and code are now CrateMate; the GitHub repository is still `bflip12/am2rb`.
+The app was called am2rb (Apple Music to Rekordbox) until the brand was settled. The app, bundle, code and GitHub repository (`bflip12/cratemate`) are now all CrateMate.
 
 ## Name
 

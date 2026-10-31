@@ -6,7 +6,7 @@
 
 **Apple Music playlists → Rekordbox, using the DJ files you already have.**
 
-[![CI](https://github.com/bflip12/am2rb/actions/workflows/ci.yml/badge.svg)](https://github.com/bflip12/am2rb/actions/workflows/ci.yml)
+[![CI](https://github.com/bflip12/cratemate/actions/workflows/ci.yml/badge.svg)](https://github.com/bflip12/cratemate/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![macOS 14+](https://img.shields.io/badge/macOS-14%2B-lightgrey.svg)
 ![Swift 6](https://img.shields.io/badge/Swift-6-orange.svg)
@@ -43,8 +43,8 @@ CrateMate doesn't use file paths from Apple Music. It matches each song by **art
 There's no prebuilt download yet, so you build it from source. That takes about a minute and doesn't need Xcode or a paid developer account.
 
 ```bash
-git clone https://github.com/bflip12/am2rb.git
-cd am2rb
+git clone https://github.com/bflip12/cratemate.git
+cd cratemate
 scripts/build-app.sh --install
 ```
 
@@ -117,7 +117,7 @@ Rekordbox links an imported entry only if the path is exactly that of a file alr
 <details>
 <summary><b>A song matched the wrong file</b></summary>
 
-Choose the right file from the row's menu, or use 🔍 to search. If the matcher keeps getting a kind of title wrong, please [open an issue](https://github.com/bflip12/am2rb/issues/new/choose). Include the Apple Music title, artist and length, plus the filename and tags of the file it should have picked.
+Choose the right file from the row's menu, or use 🔍 to search. If the matcher keeps getting a kind of title wrong, please [open an issue](https://github.com/bflip12/cratemate/issues/new/choose). Include the Apple Music title, artist and length, plus the filename and tags of the file it should have picked.
 </details>
 
 <details>
