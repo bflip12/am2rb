@@ -21,4 +21,4 @@ The first public release will be 0.1.0.
 
 - Renamed from am2rb to CrateMate. The bundle identifier is now `com.bobbyf.cratemate`, so macOS asks for Apple Music access again. The DJ folder and export folder settings carry over; the tag cache moves to `~/Library/Application Support/CrateMate` and is rebuilt on the first scan. Exports now go to `~/Music/CrateMate` by default.
 
-[Unreleased]: https://github.com/bflip12/am2rb/commits/main
+[Unreleased]: https://github.com/bflip12/cratemate/commits/main
