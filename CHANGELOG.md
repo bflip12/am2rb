@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to am2rb are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/).
+All notable changes to CrateMate are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
@@ -15,6 +15,10 @@ The first public release will be 0.1.0.
 - `.m3u8` export with absolute paths, ready for Rekordbox's Import Playlist.
 - A fallback for Apple Music's Unicode Text playlist export (⌘O).
 - A tag cache, so only new or changed files are read after the first scan.
-- An app icon and logo mark, drawn by `scripts/make-icon.sh`.
+- The CrateMate name, app icon, logo and wordmark. The icon is drawn by `scripts/make-icon.sh`; the rest is in `docs/brand`.
+
+### Changed
+
+- Renamed from am2rb to CrateMate. The bundle identifier is now `com.bobbyf.cratemate`, so macOS asks for Apple Music access again. The DJ folder and export folder settings carry over; the tag cache moves to `~/Library/Application Support/CrateMate` and is rebuilt on the first scan. Exports now go to `~/Music/CrateMate` by default.
 
 [Unreleased]: https://github.com/bflip12/am2rb/commits/main

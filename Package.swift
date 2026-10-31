@@ -2,11 +2,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "am2rb",
+    name: "CrateMate",
     platforms: [.macOS(.v14)],
     targets: [
-        .target(name: "Am2rbCore"),
-        .executableTarget(name: "am2rb", dependencies: ["Am2rbCore"]),
-        .testTarget(name: "Am2rbCoreTests", dependencies: ["Am2rbCore"]),
+        .target(name: "CrateMateCore"),
+        .executableTarget(name: "CrateMate", dependencies: ["CrateMateCore"]),
+        .testTarget(name: "CrateMateCoreTests", dependencies: ["CrateMateCore"]),
     ]
 )

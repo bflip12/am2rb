@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import Am2rbCore
+@testable import CrateMateCore
 
 @Test func normalising() {
     #expect(norm("Café del Mar") == "cafe del mar")
@@ -83,7 +83,7 @@ private func lt(_ file: String, _ artist: String, _ title: String, _ dur: Double
     ]
     var data = Data([0xFF, 0xFE])
     data.append(rows.joined(separator: "\r").data(using: .utf16LittleEndian)!)
-    let url = FileManager.default.temporaryDirectory.appendingPathComponent("am2rb-test-export.txt")
+    let url = FileManager.default.temporaryDirectory.appendingPathComponent("cratemate-test-export.txt")
     try data.write(to: url)
     let p = try parseExport(url)
     #expect(p.tracks.count == 2)
@@ -93,10 +93,10 @@ private func lt(_ file: String, _ artist: String, _ title: String, _ dur: Double
 
 /// End to end against the fake library from scripts/make-test-library.sh.
 ///
-/// Run with AM2RB_TEST_LIBRARY=<dir passed to the script>.
-@Test(.enabled(if: ProcessInfo.processInfo.environment["AM2RB_TEST_LIBRARY"] != nil))
+/// Run with CRATEMATE_TEST_LIBRARY=<dir passed to the script>.
+@Test(.enabled(if: ProcessInfo.processInfo.environment["CRATEMATE_TEST_LIBRARY"] != nil))
 func fakeLibrary() async throws {
-    let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["AM2RB_TEST_LIBRARY"]!)
+    let dir = URL(fileURLWithPath: ProcessInfo.processInfo.environment["CRATEMATE_TEST_LIBRARY"]!)
     let playlist = try parseExport(dir.appendingPathComponent("sample export.txt"))
     let scan = await scanLibrary(dir.appendingPathComponent("lib"), rescan: true)
     #expect(scan.index.count == 11)

@@ -29,19 +29,19 @@ jobs:
         run: brew install ffmpeg
 
       - name: Generate the test library
-        run: scripts/make-test-library.sh "$RUNNER_TEMP/am2rb-test"
+        run: scripts/make-test-library.sh "$RUNNER_TEMP/cratemate-test"
 
       - name: Run unit and end-to-end tests
-        run: scripts/test.sh "$RUNNER_TEMP/am2rb-test"
+        run: scripts/test.sh "$RUNNER_TEMP/cratemate-test"
 
       - name: Build the app bundle
         run: |
           scripts/build-app.sh
-          ditto -c -k --keepParent build/am2rb.app build/am2rb.zip
+          ditto -c -k --keepParent build/CrateMate.app build/CrateMate.zip
 
       - name: Upload the app bundle
         uses: actions/upload-artifact@v7
         with:
-          name: am2rb-${{ github.sha }}
-          path: build/am2rb.zip
+          name: CrateMate-${{ github.sha }}
+          path: build/CrateMate.zip
           retention-days: 14

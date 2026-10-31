@@ -1,9 +1,9 @@
 # Architecture
 
-am2rb is a Swift package with two targets:
+CrateMate is a Swift package with two targets:
 
-- **`Am2rbCore`**, a library with all the logic and no UI. Everything that can be tested lives here.
-- **`am2rb`**, the SwiftUI app. It's a thin layer over the core: one observable model and the views.
+- **`CrateMateCore`**, a library with all the logic and no UI. Everything that can be tested lives here.
+- **`CrateMate`**, the SwiftUI app. It's a thin layer over the core: one observable model and the views.
 
 ```mermaid
 flowchart LR
@@ -18,7 +18,7 @@ flowchart LR
     OUT -->|Import Playlist| RB[Rekordbox]
 ```
 
-## Core (`Sources/Am2rbCore`)
+## Core (`Sources/CrateMateCore`)
 
 | File | Responsibility |
 |---|---|
@@ -45,7 +45,7 @@ The playlists contain metadata only (title, artist, album and length), which is 
 
 1. Lists every audio file under the folder, skipping hidden files and package contents. Each file gets a cache key made of its size and modification time.
 2. Reads tags for files whose key isn't in the cache, with 16 reads in flight at once. `readTags` tries Core Audio's `kAudioFilePropertyInfoDictionary` first, which is fast and handles MP3, AIFF, WAV, FLAC and M4A. It falls back to AVFoundation for anything Core Audio left blank.
-3. Drops cache entries for files under this folder that no longer exist, then saves the cache to `~/Library/Application Support/am2rb/library-cache.json`.
+3. Drops cache entries for files under this folder that no longer exist, then saves the cache to `~/Library/Application Support/CrateMate/library-cache.json`.
 4. For untagged files, guesses the artist and title from the filename (`fromFilename`, e.g. `01 - Artist - Title.wav`).
 5. Returns a `LibraryIndex`.
 
@@ -108,7 +108,7 @@ Two files count as **the same recording** if their core titles and version token
 
 The duration is in whole seconds, or `-1` if unknown. `writeM3U` names the file after the playlist, with `/` and `:` replaced by `-`. The path is absolute, because Rekordbox links an entry to an existing collection track by comparing paths.
 
-## App (`Sources/am2rb`)
+## App (`Sources/CrateMate`)
 
 | Type | Role |
 |---|---|
@@ -121,7 +121,7 @@ How the app behaves:
 
 - Apple Music reading, scanning and matching run off the main actor with `Task.detached` or `async` core functions. Results are assigned back on the main actor.
 - A rescan clears `reviews`, because the picks were made against the old index.
-- Settings live in `UserDefaults`: `library` (the DJ folder) and `output` (the export folder, `~/Music/am2rb` by default).
+- Settings live in `UserDefaults`: `library` (the DJ folder) and `output` (the export folder, `~/Music/CrateMate` by default). If either is unset, `AppModel` falls back to the value saved under the app's old bundle identifier, `com.bobbyf.am2rb`, so settings carry over from before the rename.
 - **UI state lives on the model objects**, not in `@State`. Examples are `RowReview.searching` and `AppModel.playlistFilter`. See [CODE_STYLE.md](CODE_STYLE.md#swiftui) for why.
 
 ## Building the app bundle
@@ -129,6 +129,7 @@ How the app behaves:
 The project is a plain SwiftPM package. It has no Xcode project, so `scripts/build-app.sh` makes the `.app` itself:
 
 1. It builds the release binary with `swift build -c release`.
-2. It lays out `build/am2rb.app/Contents/{MacOS,Resources,Info.plist}`.
+2. It lays out `build/CrateMate.app/Contents/{MacOS,Resources,Info.plist}`.
 3. It restamps the binary's SDK version with `vtool`. SwiftPM records the deployment target (14.0) as the SDK version, which makes macOS run the app in compatibility mode, with the old window chrome and a title bar that doesn't follow the sidebar divider.
-4. It ad-hoc signs the bundle (`codesign --sign -`). That way TCC can remember the Apple Music permission between launches, and nobody needs a paid developer account.
+4. It copies `Resources/AppIcon.icns` into the bundle and points `CFBundleIconFile` at it. The icon is drawn in code by `scripts/make-icon.swift`; run `scripts/make-icon.sh` after changing it, and commit the `.icns` and `docs/assets/icon.png` it writes.
+5. It ad-hoc signs the bundle (`codesign --sign -`). That way TCC can remember the Apple Music permission between launches, and nobody needs a paid developer account.

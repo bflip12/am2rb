@@ -1,5 +1,5 @@
 name: Wrong or missed match
-description: am2rb picked the wrong file, or didn't find a song that's in your DJ folder.
+description: CrateMate picked the wrong file, or didn't find a song that's in your DJ folder.
 labels: [matching]
 body:
   - type: markdown
@@ -32,11 +32,11 @@ body:
   - type: textarea
     id: actual
     attributes:
-      label: What am2rb did instead
+      label: What CrateMate did instead
       description: The file it picked (with the same details) and its status (❓ or ❌), or "not found".
     validations:
       required: true
   - type: input
     id: version
     attributes:
-      label: am2rb version or commit
+      label: CrateMate version or commit

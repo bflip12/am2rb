@@ -17,7 +17,7 @@ The audience is working and bedroom DJs: people who care about records and their
 
 **How it should feel: an organisation tool for a record collection.** It sorts and files; it doesn't make music. Avoid anything that reads as a music-making or music-streaming app (waveforms, knobs, faders, equaliser bars, play buttons).
 
-The repo is still called `am2rb` (Apple Music to Rekordbox). The rename happens once the brand is settled.
+The app was called am2rb (Apple Music to Rekordbox) until the brand was settled. The app, bundle and code are now CrateMate; the GitHub repository is still `bflip12/am2rb`.
 
 ## Name
 
@@ -104,4 +104,4 @@ Later, not v1: a DMG background and website, once there's a signed download.
 - `docs/brand/` holds the marks, wordmark, lockups and this brief.
 - `docs/assets/social.png` is the GitHub social preview.
 
-The `feature/brand` branch has a first pass at the icon in this direction, drawn by `scripts/make-icon.swift` with fewer, thicker rings at 64 px and below, and matching `mark-on-light.svg` and `mark-on-dark.svg`. The app has no brand accent; it follows the system accent colour. Refine or replace any of it; the wordmark, lockups and social preview are still to do.
+A first pass of every v1 asset is in place: the icon (drawn by `scripts/make-icon.swift`, with fewer, thicker rings at 64 px and below), the marks, the outlined Geist wordmark, horizontal and stacked lockups, and `docs/assets/social.png`. [README.md](README.md) is the short usage guide. The app has no brand accent; it follows the system accent colour. Refine or replace any of it.
